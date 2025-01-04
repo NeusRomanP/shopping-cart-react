@@ -1,4 +1,5 @@
 import CartProduct from "../interfaces/CartProduct";
+import { CartItem } from "./CartItem";
 
 type Props = {
   products: Map<number, CartProduct>;
@@ -11,7 +12,7 @@ export function ProductsCart ({products}: Props) {
       {
         products.size
         ? Array.from(products, ([key, value]) => (
-          <p key={key}>{key} - {value.product.title}</p>
+          <CartItem key={key} product={value} />
         ))
         : (
           <p>No hay productos en el carrito</p>

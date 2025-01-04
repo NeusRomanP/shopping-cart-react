@@ -6,7 +6,7 @@ import CartProduct from './interfaces/CartProduct';
 import { ProductsCart } from './components/ProductsCart';
 
 function App() {
-  const [products, setProducts] = useState<Map<number, CartProduct>>(new Map());
+  const [products, setProducts] = useState<Map<number, CartProduct>>(() => new Map());
 
   const addProduct = (product: Product, amount: number) => {
     const newProducts = new Map(products);

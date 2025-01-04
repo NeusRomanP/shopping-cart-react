@@ -1,0 +1,54 @@
+.product {
+  display: flex;
+}
+
+.product > span:not(:last-child) {
+  border-right: 2px solid rebeccapurple;
+}
+
+.product > span {
+  padding: 8px;
+  display: flex;
+  align-items: center;
+}
+
+.product .image-container {
+  width: 100px;
+  aspect-ratio: 1;
+  overflow: hidden;
+}
+
+.product .image-container img {
+  max-width: 100%;
+  height: 100%;
+  background-color: white;
+  display: block;
+  object-fit: contain;
+  border-radius: 2px;
+  transition: 1s transform, 1s box-shadow;
+}
+
+.product .info {
+  display: flex;
+  flex-direction: column;
+}
+
+.product .info .price {
+  display: flex;
+  width: 100%;
+  align-items: center;
+  flex: 1;
+}
+
+.product .info .price > span {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: 8px;
+  flex: 1;
+}
+
+.product .info .price > span:not(:last-child) {
+  border-right: 2px solid rebeccapurple;
+}
+
