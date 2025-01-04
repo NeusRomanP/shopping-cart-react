@@ -1,6 +1,11 @@
 import { useState } from "react";
+import Product from "../interfaces/Product";
 
-export function ProductForm () {
+type Props = {
+  addProduct: (product: Product, amount: number) => void;
+}
+
+export function ProductForm ({ addProduct }: Props) {
 
   const [amount, setAmount] = useState('');
   const [productId, setProductId] = useState('');
@@ -20,8 +25,8 @@ export function ProductForm () {
     try {
       const res = await fetch(`https://fakestoreapi.com/products/${productId}`);
       const data = await res.json();
-  
-      console.log(data);
+
+      addProduct(data, Number(amount));
     } catch (e) {
       console.log(e)
     }
