@@ -3,9 +3,10 @@ import './CartItem.css'
 
 type Props = {
   product: CartProduct;
+  changeAmount: (productId: number, operation: (currentAmount: number) => number) => void;
 }
 
-export function CartItem ({product}: Props) {
+export function CartItem ({product, changeAmount}: Props) {
   return (
     <article className="product">
       <span className="image">
@@ -25,7 +26,17 @@ export function CartItem ({product}: Props) {
           </span>
           <span className="amount">
             <small>Cantidad</small>
-            {product.amount}
+            <span className="amount-options">
+              <button className="amount-option decrement"
+                      onClick={() => changeAmount(product.product.id, (amount: number) => amount - 1)}>
+                <span className="minus">-</span>
+              </button>
+              <span>{product.amount}</span>
+              <button className="amount-option increment"
+                      onClick={() => changeAmount(product.product.id, (amount: number) => amount + 1)}>
+                <span className="plus">+</span>
+              </button>
+            </span>
           </span>
           <span className="total-price">
             <small>Total</small>

@@ -19,13 +19,30 @@ function App() {
     setProducts(newProducts);
   }
 
+  const changeAmount = (
+    productId: number,
+    operation: (currentAmount: number) => number
+  ) => {
+    setProducts((prevProducts) => {
+      const newProducts = new Map(prevProducts);
+
+      const product = newProducts.get(productId);
+      if (product) {
+        const updatedProduct = { ...product, amount: operation(product.amount) };
+        newProducts.set(productId, updatedProduct);
+      }
+
+      return newProducts;
+    });
+  };
+
   return (
     <>
       <main>
         <section>
           <ProductForm addProduct={addProduct}/>
         </section>
-        <ProductsCart products={products} />
+        <ProductsCart products={products} changeAmount={changeAmount} />
       </main>
     </>
   )

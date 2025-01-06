@@ -1,5 +1,12 @@
 .product {
   display: flex;
+  width: 100%;
+  border: 2px solid rebeccapurple;
+  border-radius: 8px;
+}
+
+.product .info {
+  flex: 1;
 }
 
 .product > span:not(:last-child) {
@@ -15,6 +22,8 @@
 .product .image-container {
   width: 100px;
   aspect-ratio: 1;
+  display: flex;
+  justify-content: center;
   overflow: hidden;
 }
 
@@ -25,7 +34,6 @@
   display: block;
   object-fit: contain;
   border-radius: 2px;
-  transition: 1s transform, 1s box-shadow;
 }
 
 .product .info {
@@ -50,5 +58,27 @@
 
 .product .info .price > span:not(:last-child) {
   border-right: 2px solid rebeccapurple;
+}
+
+.product .info .amount-options {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+}
+
+.product .amount-option {
+  width: 16px;
+  height: 16px;
+  border: 1px solid rebeccapurple;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+}
+
+.product .amount-option .plus {
+  position: relative;
+  top: 2px;
 }
 
