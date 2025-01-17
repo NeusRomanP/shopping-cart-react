@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import './App.css'
 import { ProductForm } from './components/ProductForm'
 import Product from './interfaces/Product'
@@ -7,6 +7,17 @@ import { ProductsCart } from './components/ProductsCart';
 
 function App() {
   const [products, setProducts] = useState<Map<number, CartProduct>>(() => new Map());
+
+  useEffect(() => {
+    const productsStorage = localStorage.getItem('products');
+    setProducts(productsStorage ? new Map(Object.entries(JSON.parse(productsStorage))) : new Map());
+  }, []);
+  
+  useEffect(() => {
+    if (products.size) {
+      localStorage.setItem('products', JSON.stringify(Object.fromEntries(products)));
+    }
+  }, [products]);
 
   const addProduct = (product: Product, amount: number) => {
     const newProducts = new Map(products);
