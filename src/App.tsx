@@ -10,7 +10,16 @@ function App() {
 
   useEffect(() => {
     const productsStorage = localStorage.getItem('products');
-    setProducts(productsStorage ? new Map(Object.entries(JSON.parse(productsStorage))) : new Map());
+    if (productsStorage) {
+      const parsed = JSON.parse(productsStorage);
+      const restoredMap = new Map<number, CartProduct>(
+        Object.entries(parsed).map(([key, value]) => [Number(key), value] as [number, CartProduct])
+      );
+      setProducts(restoredMap);
+    } else {
+      setProducts(new Map());
+    }
+    
   }, []);
   
   useEffect(() => {
@@ -40,7 +49,11 @@ function App() {
       const product = newProducts.get(productId);
       if (product) {
         const updatedProduct = { ...product, amount: operation(product.amount) };
-        newProducts.set(productId, updatedProduct);
+        if (updatedProduct.amount === 0) {
+          newProducts.delete(productId);
+        } else {
+          newProducts.set(productId, updatedProduct);
+        }
       }
 
       return newProducts;
