@@ -4,13 +4,15 @@ import './ProductsCart.css'
 
 type Props = {
   products: Map<number, CartProduct>;
+  date: string;
   changeAmount: (productId: number, operation: (currentAmount: number) => number) => void;
 }
 
-export function ProductsCart ({products, changeAmount}: Props) {
+export function ProductsCart ({products, date ,changeAmount}: Props) {
   return (
     <section>
       <h3>Productos del carrito</h3>
+      <p>{date}</p>
       <main className="products-list">
         {
           products.size

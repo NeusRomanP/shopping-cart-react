@@ -6,25 +6,42 @@ import CartProduct from './interfaces/CartProduct';
 import { ProductsCart } from './components/ProductsCart';
 
 function App() {
-  const [products, setProducts] = useState<Map<number, CartProduct>>(() => new Map());
+  const [products, setProducts] = useState<Map<number, CartProduct>>(() => {
+    const productsStorage = localStorage.getItem('products');
+    return productsStorage
+      ? new Map<number, CartProduct>(
+        Object.entries(JSON.parse(productsStorage)).map(([key, value]) => [Number(key), value] as [number, CartProduct])
+      ) : new Map();
+  });
+  const [date, setDate] = useState(() => {
+    const dateStorage = localStorage.getItem('date');
+    return dateStorage || '';
+  });
 
   useEffect(() => {
-    const productsStorage = localStorage.getItem('products');
-    if (productsStorage) {
-      const parsed = JSON.parse(productsStorage);
-      const restoredMap = new Map<number, CartProduct>(
-        Object.entries(parsed).map(([key, value]) => [Number(key), value] as [number, CartProduct])
-      );
-      setProducts(restoredMap);
-    } else {
-      setProducts(new Map());
-    }
-    
   }, []);
   
   useEffect(() => {
+    console.log(products.size, 'products')
     if (products.size) {
       localStorage.setItem('products', JSON.stringify(Object.fromEntries(products)));
+      if (!localStorage.getItem('date')) {
+        const options: Intl.DateTimeFormatOptions = {
+          year: "numeric",
+          month: "numeric",
+          day: "numeric",
+          hour: "numeric",
+          minute: "numeric",
+          second: "numeric"
+        };
+        const newDate = new Intl.DateTimeFormat('es-ES', options).format(new Date());
+        setDate(newDate);
+        localStorage.setItem('date', newDate);
+      }
+    } else {
+      localStorage.removeItem('products');
+      localStorage.removeItem('date');
+      setDate('');
     }
   }, [products]);
 
@@ -66,7 +83,7 @@ function App() {
         <section>
           <ProductForm addProduct={addProduct}/>
         </section>
-        <ProductsCart products={products} changeAmount={changeAmount} />
+        <ProductsCart products={products} changeAmount={changeAmount} date={date} />
       </main>
     </>
   )
