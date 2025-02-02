@@ -5,9 +5,10 @@ import './ProductForm.css';
 type Props = {
   addProduct: (product: Product, amount: number) => void;
   error: string;
+  handleSetError: (err: string) => void;
 }
 
-export function ProductForm ({ addProduct, error }: Props) {
+export function ProductForm ({ addProduct, error, handleSetError }: Props) {
 
   const [amount, setAmount] = useState('');
   const [productId, setProductId] = useState('');
@@ -30,7 +31,8 @@ export function ProductForm ({ addProduct, error }: Props) {
 
       addProduct(data, Number(amount));
     } catch (e) {
-      console.log(e)
+      console.log(e);
+      handleSetError('Este producto no existe.');
     }
   };
 

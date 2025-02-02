@@ -87,11 +87,15 @@ function App() {
     });
   };
 
+  const handleSetError = (err: string) => {
+    setError(err);
+  }
+
   return (
     <>
       <main>
         <section>
-          <ProductForm addProduct={addProduct} error={error}/>
+          <ProductForm addProduct={addProduct} error={error} handleSetError={handleSetError}/>
         </section>
         <ProductsCart products={products} changeAmount={changeAmount} date={date} />
       </main>
