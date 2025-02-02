@@ -1,11 +1,13 @@
 import { useState } from "react";
 import Product from "../interfaces/Product";
+import './ProductForm.css';
 
 type Props = {
   addProduct: (product: Product, amount: number) => void;
+  error: string;
 }
 
-export function ProductForm ({ addProduct }: Props) {
+export function ProductForm ({ addProduct, error }: Props) {
 
   const [amount, setAmount] = useState('');
   const [productId, setProductId] = useState('');
@@ -54,6 +56,7 @@ export function ProductForm ({ addProduct }: Props) {
                  onChange={handleChangeProductId} />
           <button type="submit">Añadir</button>
         </div>
+        <p className="error">{error}</p>
       </form>
     </>
   );

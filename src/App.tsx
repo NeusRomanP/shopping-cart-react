@@ -18,6 +18,8 @@ function App() {
     return dateStorage || '';
   });
 
+  const [error, setError] = useState('');
+
   useEffect(() => {
   }, []);
   
@@ -51,9 +53,17 @@ function App() {
       amount: (products.get(product.id)?.amount || 0) + amount,
       product: product
     }
-
-    newProducts.set(product.id, cartProduct);
-    setProducts(newProducts);
+    setError('');
+    if (amount > 0) {
+      if (cartProduct.amount <= 99) {
+        newProducts.set(product.id, cartProduct);
+        setProducts(newProducts);
+      } else {
+        setError('No puedes añadir mas de 99 unidades de un mismo producto.');
+      }
+    } else {
+      setError('Debes añadir al menos 1 unidad.');
+    }
   }
 
   const changeAmount = (
@@ -66,9 +76,9 @@ function App() {
       const product = newProducts.get(productId);
       if (product) {
         const updatedProduct = { ...product, amount: operation(product.amount) };
-        if (updatedProduct.amount === 0) {
+        if (updatedProduct.amount <= 0) {
           newProducts.delete(productId);
-        } else {
+        } else if (updatedProduct.amount <= 99){
           newProducts.set(productId, updatedProduct);
         }
       }
@@ -81,7 +91,7 @@ function App() {
     <>
       <main>
         <section>
-          <ProductForm addProduct={addProduct}/>
+          <ProductForm addProduct={addProduct} error={error}/>
         </section>
         <ProductsCart products={products} changeAmount={changeAmount} date={date} />
       </main>
