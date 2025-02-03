@@ -3,13 +3,30 @@
   width: 100%;
   border: 2px solid rebeccapurple;
   border-radius: 8px;
+  position: relative;
+}
+
+.product .trash {
+  position: absolute;
+  top: 4px;
+  right: 4px;
+  width: 16px;
+  height: 16px;
+  color: red;
+  background-color: white;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+.product .trash:hover {
+  color: #AA0000;
 }
 
 .product .info {
   flex: 1;
 }
 
-.product > span:not(:last-child) {
+.product > span:not(:last-child):not(.trash) {
   border-right: 2px solid rebeccapurple;
 }
 

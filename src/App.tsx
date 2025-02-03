@@ -87,6 +87,14 @@ function App() {
     });
   };
 
+  const deleteProduct = (productId: number) => {
+    setProducts((prevProducts) => {
+      const newProducts = new Map(prevProducts);
+      newProducts.delete(productId)
+      return newProducts;
+    });
+  }
+
   const handleSetError = (err: string) => {
     setError(err);
   }
@@ -97,7 +105,8 @@ function App() {
         <section>
           <ProductForm addProduct={addProduct} error={error} handleSetError={handleSetError}/>
         </section>
-        <ProductsCart products={products} changeAmount={changeAmount} date={date} />
+        <ProductsCart products={products} changeAmount={changeAmount} date={date}
+                      deleteProduct={deleteProduct} />
       </main>
     </>
   )

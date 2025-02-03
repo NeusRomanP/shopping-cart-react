@@ -1,14 +1,19 @@
 import CartProduct from "../interfaces/CartProduct";
-import './CartItem.css'
+import './CartItem.css';
+import {TrashIcon} from '../icons/TrashIcon';
 
 type Props = {
   product: CartProduct;
   changeAmount: (productId: number, operation: (currentAmount: number) => number) => void;
+  deleteProduct: (productId: number) => void;
 }
 
-export function CartItem ({product, changeAmount}: Props) {
+export function CartItem ({product, changeAmount, deleteProduct}: Props) {
   return (
     <article className="product">
+      <span className="trash" onClick={() => deleteProduct(product.product.id)}>
+        <TrashIcon />
+      </span>
       <span className="image">
         <div className="image-container">
           <img src={product.product.image}

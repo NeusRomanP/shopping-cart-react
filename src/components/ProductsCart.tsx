@@ -6,9 +6,10 @@ type Props = {
   products: Map<number, CartProduct>;
   date: string;
   changeAmount: (productId: number, operation: (currentAmount: number) => number) => void;
+  deleteProduct: (productId: number) => void
 }
 
-export function ProductsCart ({products, date ,changeAmount}: Props) {
+export function ProductsCart ({products, date ,changeAmount, deleteProduct}: Props) {
   return (
     <section>
       <h3>Productos del carrito</h3>
@@ -17,7 +18,7 @@ export function ProductsCart ({products, date ,changeAmount}: Props) {
         {
           products.size
           ? Array.from(products, ([key, value]) => (
-            <CartItem key={key} product={value} changeAmount={changeAmount} />
+            <CartItem key={key} product={value} changeAmount={changeAmount} deleteProduct={deleteProduct}/>
           ))
           : (
             <p>No hay productos en el carrito</p>
