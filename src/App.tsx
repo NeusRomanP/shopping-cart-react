@@ -9,9 +9,8 @@ function App() {
   const [products, setProducts] = useState<Map<number, CartProduct>>(() => {
     const productsStorage = localStorage.getItem('products');
     return productsStorage
-      ? new Map<number, CartProduct>(
-        Object.entries(JSON.parse(productsStorage)).map(([key, value]) => [Number(key), value] as [number, CartProduct])
-      ) : new Map();
+      ? new Map<number, CartProduct>(JSON.parse(productsStorage))
+      : new Map();
   });
   const [date, setDate] = useState(() => {
     const dateStorage = localStorage.getItem('date');
@@ -26,7 +25,7 @@ function App() {
   useEffect(() => {
     console.log(products.size, 'products')
     if (products.size) {
-      localStorage.setItem('products', JSON.stringify(Object.fromEntries(products)));
+      localStorage.setItem('products', JSON.stringify(Array.from(products)));
       if (!localStorage.getItem('date')) {
         const options: Intl.DateTimeFormatOptions = {
           year: "numeric",
