@@ -1,6 +1,9 @@
 #root {
   max-width: 800px;
   width: 90%;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
   margin: 0 auto;
   padding: 2rem;
   text-align: center;
@@ -12,4 +15,21 @@
 
 #root > main > section {
   width: 100%;
+}
+
+header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+header img{
+  display: block;
+  padding: 16px;
+  width: 150px;
+  max-width: 90%;
+}
+
+h1, h2 {
+  margin: 0;
 }

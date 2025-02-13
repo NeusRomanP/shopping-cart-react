@@ -100,6 +100,11 @@ function App() {
 
   return (
     <>
+      <header>
+        <h1>NeRoPi</h1>
+        <h2>Carrito de la compra</h2>
+        <img src="/src/assets/logo.png" alt="logo" />
+      </header>
       <main>
         <section>
           <ProductForm addProduct={addProduct} error={error} handleSetError={handleSetError}/>

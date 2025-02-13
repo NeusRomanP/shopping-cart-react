@@ -39,23 +39,31 @@ export function ProductForm ({ addProduct, error, handleSetError }: Props) {
   return (
     <>
       <form onSubmit={handleSubmit}>
-        <div>
-          <input type="number" 
-                 placeholder="Cantidad"
-                 name="amount"
-                 id="amount"
-                 min={1}
-                 max={99}
-                 value={amount}
-                 required
-                 onChange={handleChangeAmount} />
-          <input type="text"
-                 placeholder="Id producto"
-                 name="productId"
-                 id="productId"
-                 value={productId}
-                 required
-                 onChange={handleChangeProductId} />
+        <p>Agrega productos al carrito de compra</p>
+        <div className="inputs">
+          <div className="input">
+            <label htmlFor="amount">Cantidad</label>
+            <input type="number" 
+                   placeholder="Cantidad"
+                   name="amount"
+                   id="amount"
+                   min={1}
+                   max={99}
+                   value={amount}
+                   required
+                   onChange={handleChangeAmount} />
+          </div>
+          <div className="input">
+            <label htmlFor="productId">Producto</label>
+            <input type="text"
+                   placeholder="Id producto"
+                   name="productId"
+                   id="productId"
+                   value={productId}
+                   required
+                   onChange={handleChangeProductId} />
+          </div>
+          
           <button type="submit">Añadir</button>
         </div>
         <p className="error">{error}</p>
