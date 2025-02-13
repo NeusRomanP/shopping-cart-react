@@ -32,4 +32,9 @@ header img{
 
 h1, h2 {
   margin: 0;
+  color: rebeccapurple;
+}
+
+h1 {
+  font-size: 2.5rem;
 }
