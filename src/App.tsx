@@ -103,7 +103,7 @@ function App() {
       <header>
         <h1>NeRoPi</h1>
         <h2>Carrito de la compra</h2>
-        <img src="/src/assets/logo.png" alt="logo" />
+        <img src="/logo.png" alt="logo" />
       </header>
       <main>
         <section>
